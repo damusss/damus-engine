@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Damus Engine | Documentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+
+
+<style>
+  .card-rules {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  .attrs-rules {
+    max-width: 80%;
+  }
+
+  .fix-pos{
+    position: fixed;
+  }
+
+  .top-offset {
+    top:60px;
+  }
+
+  .center-div {
+    margin: 0 auto;
+  }
+
+  .d-link {
+    color: rgb(0,100,230);
+  }
+
+  .code {
+    background-color: #272822;
+    color: #f8f8f2;
+    border-radius: 0.3rem;
+    padding: 4px 5px 5px;
+    white-space: pre-wrap;
+    text-align: start;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+mute{
+  color: rgb(100,100,100);
+}
+
+.param-rules {
+  max-width: 68%;
+}
+
+
+</style>
+
+
+
+  </head>
+  <body>
+
+
+<!--NAVBAR START-->
+
+<nav class="navbar navbar-expand-lg bg-light navbar-light sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Damus Engine</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="#">GitHub</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<!--NAVBAR END-->
+
+
+<!--DOCUMENTATION CONTAINER START-->
+
+<div class="container-fluid top-offset"><!--row s--><div class="row">
+  <!--left col start--->
+  <div class="col-2">
+    
+    <!--LIST LINKS START-->
+
+    <div class="list-group list-group-flush mt-0 fix-pos">
+      <hr>
+      <a href="#introduction" class="list-group-item list-group-item-action d-link">Introduction</a>
+      <a href="#quickstart" class="list-group-item list-group-item-action d-link">Quick Start</a>
+      <a href="#game" class="list-group-item list-group-item-action d-link">Game Class</a>
+      <a href="#scene" class="list-group-item list-group-item-action d-link">Scene Class</a>
+      <a href="#gameobjects" class="list-group-item list-group-item-action d-link">Game Object Class</a>
+      <a href="#components" class="list-group-item list-group-item-action d-link">Game Object Components</a>
+      <a href="#utilities" class="list-group-item list-group-item-action d-link">Utilities Functions</a>
+    </div>
+
+    <!--LIST LINKS END-->
+    
+  </div>
+
+  <!--left col end-->
+  <!--right col start-->
+
+  <div class="col-10">
+<br>
+    <!--INTRODUCTION start-->
+    <div class="card card-rules text-center mb-3" id="introduction">
+      <div class="card-header "><h5 class="card-titile">Introduction</h5></div>
+      <div class="card-body ">
+        <p class="card-text">
+          The goal of Damus Engine is to create games in pygame, a lot easier. The game is organized in scenes, there are a lot of useful functions, physics, collisions, text, etcetera it's already created and ready to implement. Everything is customizable. The engine take inspiration by the way the Unity Engine does things.
+        </p>
+      </div>
+    </div>
+    <!--INTRODUCTION end-->
+
+    <!--QUICK START start-->
+    <div class="card card-rules text-center mb-3" id="quickstart">
+      <div class="card-header "><h5 class="card-titile">Quick Start</h5></div>
+      <div class="card-body ">
+        <p class="card-text">
+          To start, import everything from the engine:
+          <div class="code">from damusengine import *</div>
+          then create an instance of the game class
+          <div class="code">game = Game()</div>
+          if you want to do something custom when quitting,create an onQuit function. Remember to add game.Quit() or Quit() in it or you won't be able to close the game.
+          <div class="code">def OnQuit():
+    #some cool stuff here
+    game.Quit()</div>
+          then setup the game object. No argument is needed, put them if you want to change some window properties. In this example i put them all
+          <div class="code">game.Setup((800,800),60,OnQuit,"green")</div>
+          to start the game you need at least one scene, so let's create one. All the argument are not needed, but recommended. If you don't pass them you'll have to add the scene manually. If you want, create an update function to pass to the contructor, that will be called every frame. Delta time is needed as an argument
+          <div class="code">def Update(dt):
+    print("this is the update function!")
+
+scene = Scene(game,True, Update)</div>
+        now let's create one test object
+        <div class="code">testObj = GameObject(scene,EmptyImage((100,100),"green"),(400,400))</div>
+        finally you can start the game. Check the rest of the documentation for more.
+        <div class="code">game.Start()</div>
+        </p>
+      </div>
+    </div>
+    <!--QUICK START end-->
+
+    <!--GAME CLASS start-->
+    <div class="card card-rules text-center mb-3" id="game">
+      <div class="card-header "><h5 class="card-titile">Game Class</h5></div>
+      <div class="card-body ">
+        <p class="card-text">
+          <h5 class="card-text">Constructor</h5>
+          Instantiate the class without parameters. 
+          <div class="code mt-2 mb-3">game = Game()</div>
+        </p>
+          <h5 class="card-text">Attributes</h5>
+          <ul class="list-group mt-3 attrs-rules center-div mb-3">
+            <li class="list-group-item"><b>clock</b>: used in the update. should not be used <mute>(pygame.time.Clock)</mute></li>
+            <li class="list-group-item"><b>desiredFPS</b>: fps you want to make <mute>(int)</mute></li>
+            <li class="list-group-item"><b>sizes</b>: window sizes. Cannot be changed <mute>(tuple)</mute></li>
+            <li class="list-group-item"><b>title</b>: window title <mute>(str)</mute></li>
+            <li class="list-group-item"><b>onQuitFunction</b>: function called on quit <mute>(function)</mute></li>
+            <li class="list-group-item"><b>screen</b>: window surface. Should not be changed <mute>(pygame.Surface)</mute></li>
+            <li class="list-group-item"><b>bgColor</b>: window background fill color <mute>(str or tuple)</mute></li>
+            <li class="list-group-item"><b>gravityConstant</b>: gravity constant used in rigid bodies <mute>(float)</mute></li>
+            <li class="list-group-item"><b>scenes</b>: dictionary (with int keys) that stores scenes <mute>(dict<int,Scene>)</mute></li>
+            <li class="list-group-item"><b>activeScene</b>: the active scene. Should not be changed maually <mute>(Scene)</mute></li>
+            <li class="list-group-item"><b>dt</b>: delta time. Changing it is useless <mute>(float)</mute></li>
+            <li class="list-group-item"><b>lastTime</b>: used for dt calculation, tho it's useless to use <mute>(float)</mute></li>
+            <li class="list-group-item"><b>hasSetup</b>: makes sure you call Setup(). Cannot be changed <mute>(bool)</mute></li>
+          </ul>
+        <h5 class="card-text mb-2">Functions</h5>
+        <!--function s-->
+        <div class="card attrs-rules center-div mb-3">
+          <div class="card-header">Setup() -> None</div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush center-div param-rules mb-3">
+              <li class="list-group-item"><p class="card-text">Parameters</p></li>
+  <li class="list-group-item"><b>sizes</b>: the window sizes <mute>(tuple) (not required)</mute></li>
+  <li class="list-group-item"><b>desiredFPS</b>: the fps you want <mute>(int) (not required)</mute></li>
+  <li class="list-group-item"><b>onQuit</b>: the on quit function <mute>(function) (not required)</mute></li>
+  <li class="list-group-item"><b>bgColor</b>: window background color <mute>(str or tuple) (not required)</mute></li>
+</ul>
+          <p class="card-text">Setup the attributes and the game window. It's needed to start the game.</p>
+          </div>
+        </div>
+        <!--function e-->
+        <!--function s-->
+        <div class="card attrs-rules center-div mb-3">
+          <div class="card-header">Start() -> None</div>
+          <div class="card-body">
+              <p class="card-text">No parameters needed</p>
+          <p class="card-text">Start the game. If the Setup() hasn't been called or if there is no active scene it will raise errors.</p>
+          </div>
+        </div>
+        <!--function e-->
+        <!--function s-->
+        <div class="card attrs-rules center-div mb-3">
+          <div class="card-header">Quit() -> None</div>
+          <div class="card-body">
+              <p class="card-text">No parameters needed</p>
+          <p class="card-text">Quit the game.</p>
+          </div>
+        </div>
+        <!--function e-->
+        <!--function s-->
+        <div class="card attrs-rules center-div mb-3">
+          <div class="card-header">Update() -> None</div>
+          <div class="card-body">
+              <p class="card-text">Should never be called manually.</p>
+          </div>
+        </div>
+        <!--function e-->
+        <!--function s-->
+        <div class="card attrs-rules center-div mb-3">
+          <div class="card-header">AddScene() -> None</div>
+          <div class="card-body">
+              <ul class="list-group list-group-flush center-div param-rules mb-3">
+              <li class="list-group-item"><p class="card-text">Parameters</p></li>
+  <li class="list-group-item"><b>scene</b>: the scene to add <mute>(Scene)</mute></li>
+  <li class="list-group-item"><b>isActive</b>: if the scene is the new active <mute>(bool)</mute></li>
+</ul>
+          <p class="card-text">Add a scene to the editor. Can automatically set it to active if the second parameter is True</p>
+          </div>
+        </div>
+        <!--function e-->
+        <!--function s-->
+        <div class="card attrs-rules center-div mb-3">
+          <div class="card-header">LoadScene() -> Scene</div>
+          <div class="card-body">
+              <ul class="list-group list-group-flush center-div param-rules mb-3">
+              <li class="list-group-item"><p class="card-text">Parameter</p></li>
+  <li class="list-group-item"><b>sceneIndex</b>: the index of the scene <mute>(int)</mute></li>
+</ul>
+          <p class="card-text">Set the scene with that index as active. Also returns that scene.</p>
+          </div>
+        </div>
+        <!--function e-->
+        <!--function s-->
+        <div class="card attrs-rules center-div mb-3">
+          <div class="card-header">RemoveScene() -> None</div>
+          <div class="card-body">
+              <ul class="list-group list-group-flush center-div param-rules mb-3">
+              <li class="list-group-item"><p class="card-text">Parameter</p></li>
+  <li class="list-group-item"><b>sceneIndex</b>: the index of the scene <mute>(int)</mute></li>
+</ul>
+          <p class="card-text">Remove the scene with a certain index.</p>
+          </div>
+        </div>
+        <!--function e-->
+        <!--function s-->
+        <div class="card attrs-rules center-div mb-3">
+          <div class="card-header">GetFPS() -> float</div>
+          <div class="card-body">
+              <p class="card-text">No parameters needed</p>
+          <p class="card-text">Return the game current FPS.</p>
+          </div>
+        </div>
+        <!--function e-->
+      </div>
+    </div>
+    <!--GAME CLASS end-->
+    
+  </div>
+  <!--right col end-->
+    
+</div><!--row e--></div>
+
+<!--DOCUMENATTION CONTAINER END-->
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>
