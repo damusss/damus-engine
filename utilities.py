@@ -82,3 +82,12 @@ def GetEvents()->list:
 def Quit()->None:
 	pygame.quit()
 	sys.exit()
+
+def DrawOnImage(imageToDraw:pygame.Surface,posOrRect,surfaceToDrawOn:pygame.Surface)->None:
+	surfaceToDrawOn.blit(imageToDraw,posOrRect)
+
+def DrawOnWindow(imageToDraw:pygame.Surface,posOrRect)->None:
+	pygame.display.get_surface().blit(imageToDraw,posOrRect)
+
+def GetWindowSurface() ->pygame.Surface:
+	return pygame.display.get_surface()

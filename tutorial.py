@@ -77,6 +77,8 @@ class CustomComponent(Component):
 
 # you can set an object to stay on load but i haven't tested much so it may break something
 
+# you can call StartCoroutime to create a coroutime. exactly like unity
+
 # DAMUS PARTICLES SYSTEM, A GREAT WAY TO MAKE PARTICLES IN THE DAMUS ENGINE
 # you instantiate similar to objects
 particles = ParticleSystem(scene,obj1.rect.center,obj1) #2 parameter is the origin from where particles spawn, 3 parameter is the parent. you can avoid passing this

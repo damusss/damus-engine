@@ -30,6 +30,8 @@ class GameObject(object):
 		self._scene.AddGameObject(self)
 		self._scene.SortObjectsByIndex()
 
+		self.coroutimes = []
+
 		if not self._isStatic:
 			self.AddComponent(NotStatic)
 
@@ -45,6 +47,9 @@ class GameObject(object):
 		self.speed.xy = speed
 		self.direction.xy = direction
 		self.name = name
+
+	def StartCoroutime(self,function,cooldown):
+		self.coroutimes.append([function,cooldown,pygame.time.get_ticks()])
 
 	def InstantiateCopy(self,scene=None):
 		objScene = scene if scene != None else self._scene
@@ -182,6 +187,11 @@ class GameObject(object):
 		for child in self.children:
 			child.rect.center = (self.rect.centerx+child.localPosition.x,self.rect.centery+child.localPosition.y)
 			child.position.xy = child.rect.center
+
+		for c in self.coroutimes:
+			if pygame.time.get_ticks()-c[2] >= c[1]:
+				c[0]()
+				self.coroutimes.remove(c)
 
 	@property
 	def isStatic(self):
